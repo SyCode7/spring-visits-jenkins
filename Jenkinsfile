@@ -15,7 +15,7 @@ node {
         }
         
         stage('Make Container') {
-              sh 'docker build -f src/main/docker/Dockerfile -t ktorkura/visits-service-jenkins:${env.BUILD_ID}'
+              sh 'docker build -f src/main/docker/Dockerfile -t ktorkura/visits-service-jenkins'
               }
 
         stage('Run') {
