@@ -14,9 +14,8 @@ node {
             env.version = pom.version
         }
 
-        stage('Image') {
-             sh './jenkins/scripts/deliver.sh'
-            }
+        stage('Run') {
+             sh 'mvn spring-boot:run'
         }
 
   
