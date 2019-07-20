@@ -8,11 +8,27 @@
 	<packaging>jar</packaging>
 	<description>Spring PetClinic Visits Service</description>
 
-	<parent>
+<!-- 	<parent>
 		<groupId>org.springframework.samples</groupId>
 		<artifactId>spring-petclinic-microservices</artifactId>
 		<version>1.5.3</version>
+	</parent>  -->
+	
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.5.3.RELEASE</version>
 	</parent>
+	
+	  <properties>
+        <assertj.version>3.7.0</assertj.version>
+        <spring-cloud.version>Dalston.SR1</spring-cloud.version>
+        <sleuth.version>1.2.1.RELEASE</sleuth.version>
+        <java.version>1.8</java.version>
+
+		<docker.image.prefix>mszarlinski</docker.image.prefix>
+		<docker.plugin.version>0.4.13</docker.plugin.version>
+    </properties>
 
 	<dependencies>
 		<!-- Swagger -->
@@ -55,19 +71,27 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
+			<version>${sleuth.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
+			<version>${sleuth.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
+			 <version>${sleuth.version}</version>
 		</dependency>
+		
+		
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-sleuth-zipkin</artifactId>
-		</dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 
 		<!-- Third parties -->
 		<dependency>
@@ -92,6 +116,37 @@
 		</dependency>
 
 	</dependencies>
+	
+	<dependencyManagement>
+		<dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-sleuth-dependencies</artifactId>
+				<type>pom</type>
+				<scope>import</scope>
+                <version>${sleuth.version}</version>
+            </dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+            <dependency>
+                <groupId>org.springframework.samples.petclinic.monitoring</groupId>
+                <artifactId>spring-petclinic-monitoring</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+                <scope>test</scope>
+            </dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<profiles>
 		<profile>
