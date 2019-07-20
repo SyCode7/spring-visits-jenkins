@@ -15,7 +15,7 @@ node {
         }
         
         stage('Make Container') {
-              sh 'docker build -f src/main/docker/Dockerfile -t ktorkura/visits-service-jenkins .'
+              sh 'mvn clean install -PbuildDocker'
               }
 
         stage('Run') {
