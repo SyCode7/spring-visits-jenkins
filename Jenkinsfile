@@ -13,19 +13,11 @@ node {
             print pom.version
             env.version = pom.version
         }
-        
-       stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
+
+        stage('Image') {
+             sh './jenkins/scripts/deliver.sh'
             }
         }
-
-    //    stage('Image') {
-    //        dir ('spring-visits-jenkins') {
-    //            def app = docker.build "localhost:5000/spring-visits-jenkins:${env.version}"
-     //           app.push()
-     //       }
-     //   }
 
   
         
